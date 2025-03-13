@@ -125,6 +125,9 @@ autoplay = "idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = 0
+limit_top = 0
+limit_bottom = 208
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_top_margin = 0.3
+drag_right_margin = 0.0
