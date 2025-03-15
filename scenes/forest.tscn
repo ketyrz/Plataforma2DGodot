@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://0rufwk2e5ca7"]
+[gd_scene load_steps=11 format=4 uid="uid://btsp7m4tbg0hr"]
 
 [ext_resource type="PackedScene" uid="uid://v6iee0uhxhr" path="res://entities/player.tscn" id="1_xijx7"]
 [ext_resource type="TileSet" uid="uid://gaklpck6evoc" path="res://tiles/terrain.tres" id="2_0afsd"]
@@ -8,15 +8,23 @@
 [ext_resource type="Texture2D" uid="uid://dahptln6blq88" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/3 - Bottom_leaf_piles.png" id="6_3knxq"]
 [ext_resource type="Texture2D" uid="uid://b16er207rge2n" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/2 - Trees.png" id="7_ercsu"]
 [ext_resource type="Texture2D" uid="uid://dli74x06hxgtm" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/1 - Leaf_top.png" id="8_j3csf"]
+[ext_resource type="TileSet" uid="uid://tele8c4a8gy3" path="res://tiles/props.tres" id="9_0nboi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0nboi"]
+size = Vector2(20, 205)
 
 [node name="Forest" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_xijx7")]
-position = Vector2(70, 93)
+[node name="Limits" type="Node2D" parent="."]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAAwAAgAEAAEAAAABAAwAAgAEAAEAAAACAAwAAgAEAAEAAAADAAwAAgAEAAEAAAAEAAwAAgAEAAEAAAAFAAwAAgAEAAEAAAAGAAwAAgAEAAEAAAAHAAwAAgAEAAEAAAAIAAwAAgAEAAEAAAAJAAwAAgAEAAEAAAAKAAwAAgAEAAEAAAALAAwAAgAEAAEAAAAMAAwAAgAEAAEAAAANAAwAAgAEAAEAAAAOAAwAAgAEAAEAAAAPAAwAAgAEAAEAAAAQAAwAAgAEAAEAAAARAAwAAgAEAAEAAAASAAwAAgAEAAEAAAATAAwAAgAEAAEAAAAUAAwAAgAEAAEAAAAVAAwAAgAEAAEAAAAWAAwAAgAEAAEAAAAXAAwAAgAEAAEAAAAYAAwAAgAEAAEAAAAZAAwAAgAEAAEAAAAaAAwAAgAEAAEAAAAbAAwAAgAEAAEAAAAcAAwAAgAEAAEAAAAdAAwAAgAEAAEAAAAeAAwAAgAEAAEAAAAfAAwAAgAEAAEAAAAgAAwAAgAEAAEAAAAhAAwAAgAEAAEAAAAiAAwAAgAEAAEAAAAjAAwAAgAEAAEAAAAkAAwAAgAEAAEAAAAlAAwAAgAEAAEAAAAmAAwAAgAEAAEAAAAnAAwAAgAEAAEAAAAoAAwAAgAEAAEAAAApAAwAAgAEAAEAAAAqAAwAAgAEAAEAAAArAAwAAgAEAAEAAAAsAAwAAgAEAAEAAAAtAAwAAgAEAAEAAAAuAAwAAgAEAAEAAAAvAAwAAgAEAAEAAAAwAAwAAgAEAAEAAAAxAAwAAgAEAAEAAAAyAAwAAgAEAAEAAAAzAAwAAgAEAAEAAAA0AAwAAgAEAAEAAAA1AAwAAgAEAAEAAAA2AAwAAgAEAAEAAAA3AAwAAgAEAAEAAAA4AAwAAgAEAAEAAAA5AAwAAgAEAAEAAAA6AAwAAgAEAAEAAAA7AAwAAgAEAAEAAAA8AAwAAgAEAAEAAAA9AAwAAgAEAAEAAAA+AAwAAgAEAAEAAAA/AAwAAgAEAAEAAABAAAwAAgAEAAEAAABBAAwAAgAEAAEAAABCAAwAAgAEAAEAAABDAAwAAgAEAAEAAABEAAwAAgAEAAEAAABFAAwAAgAEAAEAAABGAAwAAgAEAAEAAAAHAAoAAgADAAEAAAAHAAsAAgADAAIAAAAIAAoAAgAEAAEAAAAIAAsAAgAEAAIAAAAJAAoAAgAFAAEAAAAJAAsAAgAFAAIAAAARAAgAAgAPAAMAAAAUAAgAAgAPAAMAAAAMAAkAAgAJAAMAAAANAAkAAgAKAAMAAAAOAAkAAgANAAMAAAAXAAcAAgAJAAMAAAAYAAcAAgAKAAMAAAAZAAcAAgANAAMAAAAbAAUAAgAJAAMAAAAcAAUAAgAKAAMAAAAdAAUAAgANAAMAAAAbAAMAAgAJAAMAAAAcAAMAAgAKAAMAAAAdAAMAAgANAAMAAAA=")
-tile_set = ExtResource("2_0afsd")
+[node name="StaticBody2D" type="StaticBody2D" parent="Limits"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Limits/StaticBody2D"]
+position = Vector2(0, 92.5)
+shape = SubResource("RectangleShape2D_0nboi")
+
+[node name="Player" parent="." instance=ExtResource("1_xijx7")]
+position = Vector2(27, 173)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -36,8 +44,17 @@ motion_mirroring = Vector2(288, 0)
 texture = ExtResource("4_qm7rg")
 centered = false
 
+[node name="TreeRow3" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, 7)
+motion_scale = Vector2(0.3, 0.2)
+motion_mirroring = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/TreeRow3"]
+texture = ExtResource("4_qm7rg")
+centered = false
+
 [node name="TreeRow1" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.3, 0.3)
+motion_scale = Vector2(0.4, 0.3)
 motion_mirroring = Vector2(288, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/TreeRow1"]
@@ -45,7 +62,7 @@ texture = ExtResource("5_0nboi")
 centered = false
 
 [node name="BottomLeaf" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.4, 0.4)
+motion_scale = Vector2(0.5, 0.4)
 motion_mirroring = Vector2(288, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BottomLeaf"]
@@ -53,19 +70,25 @@ texture = ExtResource("6_3knxq")
 centered = false
 
 [node name="Trees" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.5, 0.5)
+motion_scale = Vector2(0.6, 0.5)
 motion_mirroring = Vector2(288, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Trees"]
 texture = ExtResource("7_ercsu")
 centered = false
 
-[node name="LeafTop" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.6, 0.6)
+[node name="LeafTop" type="ParallaxLayer" parent="ParallaxBackground" groups=["Player"]]
+motion_scale = Vector2(0.7, 0.6)
 motion_mirroring = Vector2(288, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/LeafTop"]
 texture = ExtResource("8_j3csf")
 centered = false
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Terrain" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAwAAgAEAAEAAAABAAwAAgAEAAEAAAACAAwAAgAEAAEAAAADAAwAAgAEAAEAAAAEAAwAAgAEAAEAAAAFAAwAAgAEAAEAAAAGAAwAAgAEAAEAAAAHAAwAAgAEAAEAAAAIAAwAAgAEAAEAAAAJAAwAAgAEAAEAAAAKAAwAAgAEAAEAAAALAAwAAgAEAAEAAAAMAAwAAgAEAAEAAAANAAwAAgAEAAEAAAAOAAwAAgAEAAEAAAAPAAwAAgAEAAEAAAAQAAwAAgAEAAEAAAARAAwAAgAEAAEAAAASAAwAAgAEAAEAAAATAAwAAgAEAAEAAAAUAAwAAgAEAAEAAAAVAAwAAgAEAAEAAAAWAAwAAgAEAAEAAAAXAAwAAgAEAAEAAAAYAAwAAgAEAAEAAAAZAAwAAgAEAAEAAAAaAAwAAgAEAAEAAAAbAAwAAgAEAAEAAAAcAAwAAgAEAAEAAAAdAAwAAgAEAAEAAAAeAAwAAgAEAAEAAAAfAAwAAgAEAAEAAAAgAAwAAgAEAAEAAAAhAAwAAgAEAAEAAAAiAAwAAgAEAAEAAAAjAAwAAgAEAAEAAAAkAAwAAgAEAAEAAAAlAAwAAgAEAAEAAAAmAAwAAgAEAAEAAAAnAAwAAgAEAAEAAAAoAAwAAgAEAAEAAAApAAwAAgAEAAEAAAAqAAwAAgAEAAEAAAArAAwAAgAEAAEAAAAsAAwAAgAEAAEAAAAtAAwAAgAEAAEAAAAuAAwAAgAEAAEAAAAvAAwAAgAEAAEAAAAwAAwAAgAEAAEAAAAxAAwAAgAEAAEAAAAyAAwAAgAEAAEAAAAzAAwAAgAEAAEAAAA0AAwAAgAEAAEAAAA1AAwAAgAEAAEAAAA2AAwAAgAEAAEAAAA3AAwAAgAEAAEAAAA4AAwAAgAEAAEAAAA5AAwAAgAEAAEAAAA6AAwAAgAEAAEAAAA7AAwAAgAEAAEAAAA8AAwAAgAEAAEAAAA9AAwAAgAEAAEAAAA+AAwAAgAEAAEAAAA/AAwAAgAEAAEAAABAAAwAAgAEAAEAAABBAAwAAgAEAAEAAABCAAwAAgAEAAEAAABDAAwAAgAEAAEAAABEAAwAAgAEAAEAAABFAAwAAgAEAAEAAABGAAwAAgAEAAEAAAAHAAoAAgADAAEAAAAHAAsAAgADAAIAAAAIAAoAAgAEAAEAAAAIAAsAAgAEAAIAAAAJAAoAAgAFAAEAAAAJAAsAAgAFAAIAAAARAAgAAgAPAAMAAAAUAAgAAgAPAAMAAAAMAAkAAgAJAAMAAAANAAkAAgAKAAMAAAAOAAkAAgANAAMAAAAXAAcAAgAJAAMAAAAYAAcAAgAKAAMAAAAZAAcAAgANAAMAAAAbAAUAAgAJAAMAAAAcAAUAAgAKAAMAAAAdAAUAAgANAAMAAAAeAAgAAgAJAAMAAAAfAAgAAgAKAAMAAAAgAAgAAgANAAMAAAAkAAgAAgAJAAMAAAAlAAgAAgAKAAMAAAAmAAgAAgANAAMAAAA=")
+tile_set = ExtResource("2_0afsd")
+
+[node name="Props" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAEAAoABgABAAEAAAAWAAoABgAFAAEAAAAcAAoABgAFAAEAAAAXAAoABgABAAEAAAARAAoABgAFAAEAAAAgAAoABgAFAAEAAAAhAAoABgABAAEAAAAiAAoABgAFAAEAAAApAAoABgABAAEAAAAqAAoABgAFAAEAAAArAAoABgABAAEAAAAsAAoABgAFAAEAAAAvAAoABgABAAEAAAAwAAoABgABAAEAAAAxAAoABgAFAAEAAAAyAAoABgABAAEAAAAzAAoABgAFAAEAAAA0AAoABgABAAEAAAAIAAkABgADAAUAAAAMAAgABgADAAUAAAAYAAYABgABAAUAAAAZAAsABgABAAUAAAAFAAsABgABAAUAAAADAAsABgABAAUAAAAEAAsABgABAAUAAAAAAAoABgABAAEAAAA=")
+tile_set = ExtResource("9_0nboi")
