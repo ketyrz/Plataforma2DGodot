@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://btsp7m4tbg0hr"]
+[gd_scene load_steps=13 format=4 uid="uid://btsp7m4tbg0hr"]
 
 [ext_resource type="PackedScene" uid="uid://v6iee0uhxhr" path="res://entities/player.tscn" id="1_xijx7"]
 [ext_resource type="TileSet" uid="uid://gaklpck6evoc" path="res://tiles/terrain.tres" id="2_0afsd"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://b16er207rge2n" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/2 - Trees.png" id="7_ercsu"]
 [ext_resource type="Texture2D" uid="uid://dli74x06hxgtm" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/1 - Leaf_top.png" id="8_j3csf"]
 [ext_resource type="TileSet" uid="uid://tele8c4a8gy3" path="res://tiles/props.tres" id="9_0nboi"]
+[ext_resource type="PackedScene" uid="uid://c3w5s7b4n6e2g" path="res://entities/camera.tscn" id="10_3knxq"]
+[ext_resource type="PackedScene" uid="uid://cvljdv32xyjoh" path="res://entities/level_end.tscn" id="11_ercsu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0nboi"]
 size = Vector2(20, 205)
@@ -23,7 +25,7 @@ size = Vector2(20, 205)
 position = Vector2(0, 92.5)
 shape = SubResource("RectangleShape2D_0nboi")
 
-[node name="Player" parent="." instance=ExtResource("1_xijx7")]
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_xijx7")]
 position = Vector2(27, 173)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -77,7 +79,7 @@ motion_mirroring = Vector2(288, 0)
 texture = ExtResource("7_ercsu")
 centered = false
 
-[node name="LeafTop" type="ParallaxLayer" parent="ParallaxBackground" groups=["Player"]]
+[node name="LeafTop" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.7, 0.6)
 motion_mirroring = Vector2(288, 0)
 
@@ -92,3 +94,12 @@ tile_set = ExtResource("2_0afsd")
 [node name="Props" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAEAAoABgABAAEAAAAWAAoABgAFAAEAAAAcAAoABgAFAAEAAAAXAAoABgABAAEAAAARAAoABgAFAAEAAAAgAAoABgAFAAEAAAAhAAoABgABAAEAAAAiAAoABgAFAAEAAAApAAoABgABAAEAAAAqAAoABgAFAAEAAAArAAoABgABAAEAAAAsAAoABgAFAAEAAAAvAAoABgABAAEAAAAwAAoABgABAAEAAAAxAAoABgAFAAEAAAAyAAoABgABAAEAAAAzAAoABgAFAAEAAAA0AAoABgABAAEAAAAIAAkABgADAAUAAAAMAAgABgADAAUAAAAYAAYABgABAAUAAAAZAAsABgABAAUAAAAFAAsABgABAAUAAAADAAsABgABAAUAAAAEAAsABgABAAUAAAAAAAoABgABAAEAAAA=")
 tile_set = ExtResource("9_0nboi")
+
+[node name="Camera2D" parent="." instance=ExtResource("10_3knxq")]
+limit_left = 0
+limit_top = 0
+limit_bottom = 208
+
+[node name="LevelEnd" parent="." instance=ExtResource("11_ercsu")]
+position = Vector2(136, 149)
+next_level = "tropic"

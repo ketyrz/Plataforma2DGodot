@@ -1,13 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://v6iee0uhxhr"]
+[gd_scene load_steps=20 format=3 uid="uid://v6iee0uhxhr"]
 
 [ext_resource type="Script" uid="uid://cpax56msx7nvu" path="res://scripts/player.gd" id="1_fwl5g"]
 [ext_resource type="Texture2D" uid="uid://7hnreksjx2nd" path="res://sprites/1 - Penguin/Idle (16 x 16).png" id="1_ok3pm"]
 [ext_resource type="Texture2D" uid="uid://ba65tnm6m2nvc" path="res://sprites/1 - Penguin/Waddling (16 x 16).png" id="3_4vlu7"]
 [ext_resource type="Texture2D" uid="uid://l644g3xwknr6" path="res://sprites/1 - Penguin/Jump (16 x 16).png" id="3_hpnnb"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a43tn"]
-radius = 6.0
-height = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4fswc"]
 atlas = ExtResource("1_ok3pm")
@@ -111,19 +107,34 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a43tn"]
+radius = 6.0
+height = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rfe5m"]
+size = Vector2(10, 14)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_fwl5g")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_a43tn")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_rwx8p")
-animation = &"jump"
+animation = &"idle"
 autoplay = "idle"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-limit_left = 0
-limit_top = 0
-limit_bottom = 208
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_a43tn")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+z_index = 1
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_rfe5m")
+debug_color = Color(0.760741, 0.178701, 1, 0.42)
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

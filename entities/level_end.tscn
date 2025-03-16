@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvljdv32xyjoh"]
+
+[ext_resource type="Script" uid="uid://bci323pj04ppc" path="res://scripts/level_end.gd" id="1_y82ty"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4bc8j"]
+
+[node name="LevelEnd" type="Area2D" groups=["level_end"]]
+script = ExtResource("1_y82ty")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4bc8j")

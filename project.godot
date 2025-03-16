@@ -22,6 +22,12 @@ window/size/viewport_height=208
 window/size/mode=2
 window/stretch/mode="canvas_items"
 
+[global_group]
+
+player=""
+death_zone=""
+level_end=""
+
 [input]
 
 left={
