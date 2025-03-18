@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://dbfjs2oww0s6b"]
+[gd_scene load_steps=21 format=4 uid="uid://dbfjs2oww0s6b"]
 
 [ext_resource type="PackedScene" uid="uid://v6iee0uhxhr" path="res://entities/player.tscn" id="1_j8cmn"]
 [ext_resource type="TileSet" uid="uid://gaklpck6evoc" path="res://tiles/terrain.tres" id="2_mtmls"]
@@ -12,6 +12,7 @@
 [ext_resource type="TileSet" uid="uid://dxbncexkhs3n3" path="res://tiles/builds.tres" id="10_tqg4o"]
 [ext_resource type="TileSet" uid="uid://tele8c4a8gy3" path="res://tiles/props.tres" id="11_uy2sc"]
 [ext_resource type="PackedScene" uid="uid://c3w5s7b4n6e2g" path="res://entities/camera.tscn" id="12_uy2sc"]
+[ext_resource type="PackedScene" uid="uid://b063xf7i1oass" path="res://entities/death_zone.tscn" id="13_g24r1"]
 [ext_resource type="PackedScene" uid="uid://cvljdv32xyjoh" path="res://entities/level_end.tscn" id="13_o3kau"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tqg4o"]
@@ -43,8 +44,8 @@ texture = ExtResource("8_63ryy")
 [sub_resource type="TileSet" id="TileSet_ttii7"]
 sources/0 = SubResource("TileSetAtlasSource_wyuaa")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uy2sc"]
-size = Vector2(1790, 20)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g24r1"]
+size = Vector2(1185, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o3kau"]
 size = Vector2(20, 296)
@@ -52,7 +53,9 @@ size = Vector2(20, 296)
 [node name="Tropic" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource("12_uy2sc")]
+position = Vector2(13, 165)
 limit_left = 0
+limit_right = 1090
 limit_bottom = 208
 
 [node name="Limits" type="Node2D" parent="."]
@@ -64,7 +67,7 @@ position = Vector2(-4, 90)
 shape = SubResource("RectangleShape2D_tqg4o")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_j8cmn")]
-position = Vector2(27, 151)
+position = Vector2(13, 173)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -122,21 +125,19 @@ tile_set = ExtResource("10_tqg4o")
 tile_map_data = PackedByteArray("AAACAAkAAQABAAEAAAADAAoAAgAAAAAAAAACAAoAAgABAAAAAAAGAAoABQADAAUAAAATAAoAAQAFAAMAAAAUAAoAAQAGAAMAAAAVAAoAAQAGAAMAAAAWAAoAAQAGAAMAAAAXAAoAAQAGAAMAAAAYAAYABQADAAUAAAAYAAoAAQAGAAMAAAAZAAoAAQAGAAMAAAAaAAoAAQAGAAMAAAAbAAoAAQAGAAMAAAAcAAoAAQAGAAMAAAAdAAoAAQAGAAMAAAAeAAoAAQAGAAMAAAAfAAoAAQAGAAMAAAAgAAoAAQAGAAMAAAAhAAoAAQAGAAMAAAAiAAoAAQAGAAMAAAAjAAoAAQAGAAMAAAAVAAcABQAJAAEAAAAcAAUABAAFAAIAAAAcAAYABAAFAAMAAAAdAAUABAAGAAIAAAAdAAYABAAGAAMAAAAeAAUABAAHAAIAAAAeAAYABAAHAAMAAAAfAAUABAAIAAIAAAAfAAYABAAIAAMAAAAgAAYABQABAAUAAAAiAAQAAgABAAAAAAAjAAMAAwADAAEAAAAjAAQAAwADAAIAAAAkAAMAAwAEAAEAAAAkAAQAAwAEAAIAAAAkAAoAAQAGAAMAAAAlAAMABQABAAEAAAAlAAQAAwAFAAIAAAAlAAoAAQAGAAMAAAAmAAQAAgAAAAAAAAAmAAoAAQAGAAMAAAAnAAgAAQAJAAMAAAAnAAoAAQAGAAMAAAAoAAcABQAJAAEAAAAoAAoAAQAGAAMAAAApAAoAAQAGAAMAAAAqAAkABQABAAEAAAAqAAoAAQAGAAMAAAArAAoAAQAHAAMAAAAwAAoABQABAAUAAAAxAAoAAQAFAAMAAAAyAAoAAQAGAAMAAAAzAAoAAQAGAAMAAAA0AAkAAQABAAEAAAA0AAoAAQAGAAMAAAA1AAoAAQAHAAMAAAAjAAkABAABAAEAAAA=")
 tile_set = ExtResource("11_uy2sc")
 
-[node name="DeathZone" type="Area2D" parent="." groups=["death_zone"]]
-z_index = 3
-position = Vector2(0, 205)
+[node name="DeathZone" parent="." instance=ExtResource("13_g24r1")]
+position = Vector2(0, 204)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
-position = Vector2(892, 3)
-shape = SubResource("RectangleShape2D_uy2sc")
-debug_color = Color(0.729412, 0.329412, 0.85098, 0.262745)
+[node name="CollisionShape2D" parent="DeathZone" index="0"]
+position = Vector2(579, -1)
+shape = SubResource("RectangleShape2D_g24r1")
 
 [node name="LevelEnd" parent="." instance=ExtResource("13_o3kau")]
 position = Vector2(1106, 33)
 next_level = "forest"
 
 [node name="CollisionShape2D" parent="LevelEnd" index="0"]
-position = Vector2(-1003, 0)
 shape = SubResource("RectangleShape2D_o3kau")
 
+[editable path="DeathZone"]
 [editable path="LevelEnd"]

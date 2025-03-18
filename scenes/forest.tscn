@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://btsp7m4tbg0hr"]
+[gd_scene load_steps=14 format=4 uid="uid://btsp7m4tbg0hr"]
 
 [ext_resource type="PackedScene" uid="uid://v6iee0uhxhr" path="res://entities/player.tscn" id="1_xijx7"]
 [ext_resource type="TileSet" uid="uid://gaklpck6evoc" path="res://tiles/terrain.tres" id="2_0afsd"]
@@ -15,6 +15,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0nboi"]
 size = Vector2(20, 205)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ercsu"]
+size = Vector2(20, 201)
+
 [node name="Forest" type="Node2D"]
 
 [node name="Limits" type="Node2D" parent="."]
@@ -26,7 +29,7 @@ position = Vector2(0, 92.5)
 shape = SubResource("RectangleShape2D_0nboi")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_xijx7")]
-position = Vector2(27, 173)
+position = Vector2(21, 188)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -98,8 +101,15 @@ tile_set = ExtResource("9_0nboi")
 [node name="Camera2D" parent="." instance=ExtResource("10_3knxq")]
 limit_left = 0
 limit_top = 0
+limit_right = 895
 limit_bottom = 208
 
 [node name="LevelEnd" parent="." instance=ExtResource("11_ercsu")]
-position = Vector2(136, 149)
+position = Vector2(915, 107)
 next_level = "tropic"
+
+[node name="CollisionShape2D" parent="LevelEnd" index="0"]
+position = Vector2(0, -11.5)
+shape = SubResource("RectangleShape2D_ercsu")
+
+[editable path="LevelEnd"]

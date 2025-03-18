@@ -45,10 +45,13 @@ func _physics_process(delta: float) -> void:
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	if area.is_in_group("death_zone"):
-		get_tree().reload_current_scene()
+		call_deferred("reload_level")
 	elif area.is_in_group("level_end"):
 		var next_level = area.next_level
-		call_deferred("load_next_level", next_level)
+		call_deferred("load_level", next_level)
 
-func load_next_level(level_name: String):
+func reload_level():
+	get_tree().reload_current_scene()
+
+func load_level(level_name: String):
 	get_tree().change_scene_to_file("res://scenes/" + level_name + ".tscn")
