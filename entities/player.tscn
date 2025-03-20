@@ -111,7 +111,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_fwl5g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -122,8 +122,3 @@ z_index = 1
 sprite_frames = SubResource("SpriteFrames_rwx8p")
 animation = &"jump"
 autoplay = "idle"
-
-[node name="Camera2D" type="Camera2D" parent="."]
-limit_left = 0
-limit_top = 0
-limit_bottom = 208
