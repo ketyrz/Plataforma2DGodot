@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://btsp7m4tbg0hr"]
+[gd_scene load_steps=12 format=4 uid="uid://btsp7m4tbg0hr"]
 
 [ext_resource type="PackedScene" uid="uid://v6iee0uhxhr" path="res://entities/player.tscn" id="1_xijx7"]
 [ext_resource type="TileSet" uid="uid://gaklpck6evoc" path="res://tiles/terrain.tres" id="2_0afsd"]
@@ -9,22 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://b16er207rge2n" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/2 - Trees.png" id="7_ercsu"]
 [ext_resource type="Texture2D" uid="uid://dli74x06hxgtm" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/1 - Leaf_top.png" id="8_j3csf"]
 [ext_resource type="TileSet" uid="uid://tele8c4a8gy3" path="res://tiles/props.tres" id="9_0nboi"]
+[ext_resource type="PackedScene" uid="uid://bw0e0x5m2rl3t" path="res://entities/camera.tscn" id="10_3knxq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0nboi"]
-size = Vector2(20, 205)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3knxq"]
+size = Vector2(20, 318)
 
 [node name="Forest" type="Node2D"]
 
-[node name="Limits" type="Node2D" parent="."]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Limits"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Limits/StaticBody2D"]
-position = Vector2(0, 92.5)
-shape = SubResource("RectangleShape2D_0nboi")
-
 [node name="Player" parent="." instance=ExtResource("1_xijx7")]
-position = Vector2(27, 173)
+position = Vector2(29, 178)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -92,3 +85,23 @@ tile_set = ExtResource("2_0afsd")
 [node name="Props" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAEAAoABgABAAEAAAAWAAoABgAFAAEAAAAcAAoABgAFAAEAAAAXAAoABgABAAEAAAARAAoABgAFAAEAAAAgAAoABgAFAAEAAAAhAAoABgABAAEAAAAiAAoABgAFAAEAAAApAAoABgABAAEAAAAqAAoABgAFAAEAAAArAAoABgABAAEAAAAsAAoABgAFAAEAAAAvAAoABgABAAEAAAAwAAoABgABAAEAAAAxAAoABgAFAAEAAAAyAAoABgABAAEAAAAzAAoABgAFAAEAAAA0AAoABgABAAEAAAAIAAkABgADAAUAAAAMAAgABgADAAUAAAAYAAYABgABAAUAAAAZAAsABgABAAUAAAAFAAsABgABAAUAAAADAAsABgABAAUAAAAEAAsABgABAAUAAAAAAAoABgABAAEAAAA=")
 tile_set = ExtResource("9_0nboi")
+
+[node name="Camera2D" parent="." instance=ExtResource("10_3knxq")]
+position = Vector2(36, 78)
+limit_left = 0
+limit_top = 0
+limit_right = 885
+limit_bottom = 208
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 63)
+shape = SubResource("RectangleShape2D_3knxq")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(889, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(0, 63)
+shape = SubResource("RectangleShape2D_3knxq")

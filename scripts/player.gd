@@ -42,3 +42,9 @@ func _physics_process(delta: float) -> void:
 
 		
 	move_and_slide()
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group("DeathZone"):
+		get_tree().reload_current_scene()
+	elif area.is_in_group("LevelEnd"):
+		get_tree().change_scene_to_file("res://scenes/forest.tscn")
