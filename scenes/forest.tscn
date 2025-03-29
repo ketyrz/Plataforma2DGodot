@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://btsp7m4tbg0hr"]
+[gd_scene load_steps=13 format=4 uid="uid://btsp7m4tbg0hr"]
 
 [ext_resource type="PackedScene" uid="uid://v6iee0uhxhr" path="res://entities/player.tscn" id="1_xijx7"]
 [ext_resource type="TileSet" uid="uid://gaklpck6evoc" path="res://tiles/terrain.tres" id="2_0afsd"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dli74x06hxgtm" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/1 - Leaf_top.png" id="8_j3csf"]
 [ext_resource type="TileSet" uid="uid://tele8c4a8gy3" path="res://tiles/props.tres" id="9_0nboi"]
 [ext_resource type="PackedScene" uid="uid://bw0e0x5m2rl3t" path="res://entities/camera.tscn" id="10_3knxq"]
+[ext_resource type="PackedScene" uid="uid://b6tbw251453hi" path="res://entities/level_end.tscn" id="11_ercsu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3knxq"]
 size = Vector2(20, 318)
@@ -105,3 +106,7 @@ position = Vector2(889, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(0, 63)
 shape = SubResource("RectangleShape2D_3knxq")
+
+[node name="LevelEnd" parent="." instance=ExtResource("11_ercsu")]
+position = Vector2(72, 182)
+next_level = "tropic"
