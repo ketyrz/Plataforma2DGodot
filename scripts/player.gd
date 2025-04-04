@@ -52,6 +52,12 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			call_deferred("load_scene", next_level)
 		else:
 			push_error("Próxima fase não definida em EndLevel")
+	elif area.is_in_group("Enemy"):
+		if velocity.y > 0:
+			velocity.y = JUMP_VELOCITY
+			area.get_parent().queue_free()
+		else:
+			reload_scene()
 
 func reload_scene():
 	get_tree().reload_current_scene()
