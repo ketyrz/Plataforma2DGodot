@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dgh4dvddbnshs"]
+[gd_scene load_steps=28 format=3 uid="uid://dgh4dvddbnshs"]
 
 [ext_resource type="Script" uid="uid://bir52klb6cjmx" path="res://scripts/enemy.gd" id="1_pqhw6"]
 [ext_resource type="Texture2D" uid="uid://dk58mykxi7aco" path="res://sprites/3 - Skeleton/Crumbling_Into_Bone_Pile (32 x 32).png" id="2_uvc0s"]
@@ -157,6 +157,9 @@ height = 24.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pqhw6"]
 size = Vector2(11, 22)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8e4v"]
+size = Vector2(6, 22.5)
+
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_pqhw6")
@@ -165,19 +168,30 @@ script = ExtResource("1_pqhw6")
 sprite_frames = SubResource("SpriteFrames_pqhw6")
 animation = &"attack"
 autoplay = "walk"
+frame = 2
+frame_progress = 0.456568
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_b4nis")
 
 [node name="Hitbox" type="Area2D" parent="." groups=["Enemy"]]
-visible = false
 script = ExtResource("3_b4nis")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(1.5, 5)
 shape = SubResource("RectangleShape2D_pqhw6")
 debug_color = Color(0.917648, 6.80569e-05, 0.704958, 0.42)
+
+[node name="AttackHitbox" type="Area2D" parent="." groups=["Enemy"]]
+process_mode = 4
+position = Vector2(6, 0)
+script = ExtResource("3_b4nis")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+position = Vector2(5, 0.75)
+shape = SubResource("RectangleShape2D_x8e4v")
+debug_color = Color(0.81, 0, 0.621, 0.501961)
 
 [node name="Fall" type="RayCast2D" parent="."]
 position = Vector2(10, 0)
@@ -188,7 +202,7 @@ position = Vector2(10, 0)
 target_position = Vector2(7, 0)
 
 [node name="PlayerAttack" type="RayCast2D" parent="."]
-target_position = Vector2(24, 0)
+target_position = Vector2(14, 0)
 collision_mask = 2
 
 [node name="PlayerBack" type="RayCast2D" parent="."]

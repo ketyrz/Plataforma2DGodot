@@ -39,8 +39,6 @@ func _physics_process(delta: float) -> void:
 	elif velocity.x < 0:
 		anim.flip_h = true
 		
-
-		
 	move_and_slide()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
@@ -56,7 +54,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		if velocity.y > 0:
 			velocity.y = JUMP_VELOCITY
 			area.take_damage()
-		#else:
+		else:
+			print("dead")
 			#call_deferred("reload_scene")
 
 func reload_scene():

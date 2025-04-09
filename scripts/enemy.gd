@@ -12,6 +12,7 @@ enum EnemyState {
 @onready var terrain: RayCast2D = $Terrain
 @onready var player_attack: RayCast2D = $PlayerAttack
 @onready var player_back: RayCast2D = $PlayerBack
+@onready var attack_hitbox: Area2D = $AttackHitbox
 
 var speed = 500
 var direction: int = 1
@@ -44,6 +45,7 @@ func walking(delta: float):
 		
 	if player_attack.is_colliding():
 		goToAttackState()
+		
 	if player_back.is_colliding():
 		turn()
 	
@@ -53,7 +55,10 @@ func goToAttackState():
 	anim.play("attack")
 	
 func attack():
-	pass
+	if anim.frame == 2:
+		attack_hitbox.process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		attack_hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	
 func goToDeadState():
 	status = EnemyState.dead
