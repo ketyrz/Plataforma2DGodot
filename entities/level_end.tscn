@@ -5,6 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g24r1"]
 
 [node name="LevelEnd" type="Area2D" groups=["LevelEnd"]]
+collision_mask = 6
 script = ExtResource("1_y82ty")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
