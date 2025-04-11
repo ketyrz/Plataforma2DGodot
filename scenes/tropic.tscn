@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://dbfjs2oww0s6b"]
+[gd_scene load_steps=21 format=4 uid="uid://dbfjs2oww0s6b"]
 
 [ext_resource type="PackedScene" uid="uid://v6iee0uhxhr" path="res://entities/player.tscn" id="1_j8cmn"]
 [ext_resource type="TileSet" uid="uid://gaklpck6evoc" path="res://tiles/terrain.tres" id="2_mtmls"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bw0e0x5m2rl3t" path="res://entities/camera.tscn" id="12_uy2sc"]
 [ext_resource type="PackedScene" uid="uid://cmoqj21ly85yu" path="res://entities/death_zone.tscn" id="13_o3kau"]
 [ext_resource type="PackedScene" uid="uid://pm8ktpqbx6a2" path="res://entities/level_end.tscn" id="14_g24r1"]
+[ext_resource type="PackedScene" uid="uid://dejcawvj3v4ys" path="res://entities/enemy.tscn" id="15_q1idf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tqg4o"]
 size = Vector2(20, 196)
@@ -52,6 +53,7 @@ size = Vector2(14, 16)
 [node name="Limits" type="Node2D" parent="."]
 
 [node name="Left" type="StaticBody2D" parent="Limits"]
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Limits/Left"]
 position = Vector2(-4, 90)
@@ -124,11 +126,14 @@ limit_bottom = 208
 position = Vector2(-17, 202)
 
 [node name="LevelEnd" parent="." instance=ExtResource("14_g24r1")]
-position = Vector2(109, 156)
+position = Vector2(270, 124)
 next_level = "forest"
 
 [node name="CollisionShape2D" parent="LevelEnd" index="0"]
 position = Vector2(-5, 13)
 shape = SubResource("RectangleShape2D_g24r1")
+
+[node name="Enemy" parent="." instance=ExtResource("15_q1idf")]
+position = Vector2(196, 159)
 
 [editable path="LevelEnd"]
