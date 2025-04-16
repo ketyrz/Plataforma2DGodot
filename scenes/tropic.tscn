@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bw0e0x5m2rl3t" path="res://entities/camera.tscn" id="12_uy2sc"]
 [ext_resource type="PackedScene" uid="uid://cmoqj21ly85yu" path="res://entities/death_zone.tscn" id="13_o3kau"]
 [ext_resource type="PackedScene" uid="uid://pm8ktpqbx6a2" path="res://entities/level_end.tscn" id="14_g24r1"]
-[ext_resource type="PackedScene" uid="uid://dejcawvj3v4ys" path="res://entities/enemy.tscn" id="15_q1idf"]
+[ext_resource type="PackedScene" uid="uid://dgh4dvddbnshs" path="res://entities/enemy.tscn" id="15_q1idf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tqg4o"]
 size = Vector2(20, 196)

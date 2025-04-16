@@ -60,7 +60,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			area.take_damage() # deleta o inimigo
 			jump()
 		else:
-			reload_scene()
+			call_deferred("reload_scene")
 			
 
 func reload_scene():
