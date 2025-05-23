@@ -1,107 +1,51 @@
 extends CharacterBody2D
 
-enum PlayerState {
-	idle,
-	walk,
-	jump
-}
-const BUBBLE = preload("res://entities/bubble.tscn")
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -300.0
-var last_direction = 1
 
 @export var max_jump_count = 2
 
 var jump_count = 0
 
-var status: PlayerState
-
-func _ready() -> void:
-	go_to_idle_state()
-
 func _physics_process(delta: float) -> void:
-
+	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-		
-	if Input.is_action_just_pressed("shot"):
-		var new_bubble = BUBBLE.instantiate()
-		new_bubble.position = position
-		new_bubble.direction = last_direction
-		add_sibling(new_bubble)
-
-	match status:
-		PlayerState.idle:
-			idle_state()
-		PlayerState.walk:
-			walk_state()
-		PlayerState.jump:
-			jump_state()
-			
-	move_and_slide()
-
-func go_to_idle_state():
-	status = PlayerState.idle
-	anim.play("idle")
-
-func go_to_walk_state():
-	status = PlayerState.walk
-	anim.play("walk")
-	
-func go_to_jump_state():
-	status = PlayerState.jump
-	anim.play("jump")
-	velocity.y = JUMP_VELOCITY
-	
-func idle_state():
-	move()
-	# Se andou
-	if velocity.x != 0:
-		go_to_walk_state()
-		return
-	
-	# Se pulou
-	if Input.is_action_just_pressed("jump"):
-		go_to_jump_state()
-		return
-	
-func walk_state():
-	move()
-	if velocity.x == 0:
-		go_to_idle_state()
-		return
-		
-	if Input.is_action_just_pressed("jump"):
-		go_to_jump_state()
-		return
-	
-func jump_state():
-	move()
-	if is_on_floor():
-		if velocity.x == 0:
-			go_to_idle_state()
+	else:
+		jump_count = 0
+		if velocity.x != 0:
+			anim.play("walk")
 		else:
-			go_to_walk_state()
-		return
-	
-func move():
+			anim.play("idle")
+
+	# Handle jump.
+	if Input.is_action_just_pressed("jump") and jump_count < max_jump_count:
+		jump()
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
 	if direction:
 		velocity.x = direction * SPEED
-		last_direction = direction
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		
-	
 
 	if velocity.x > 0:
 		anim.flip_h = false
 	elif velocity.x < 0:
 		anim.flip_h = true
 		
+
 		
+	move_and_slide()
+
+func jump():
+	velocity.y = JUMP_VELOCITY
+	jump_count += 1 
+	anim.play("jump")
+
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("DeathZone"):
 		call_deferred("reload_scene")
@@ -114,7 +58,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	elif area.is_in_group("Enemies"):
 		if velocity.y > 0: # o player matou o inimigo
 			area.take_damage() # deleta o inimigo
-			go_to_jump_state()
+			jump()
 		else:
 			reload_scene()
 			
